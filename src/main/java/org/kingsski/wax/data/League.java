@@ -1,19 +1,17 @@
-package org.kingsski.wax.data;
+// Kings Ski Club 2017
 
+package org.kingsski.wax.data;
 
 /**
  * <p>
  * Central location for storing the defined leagues since they are not stored in
  * the database.
  * </p>
- * 
  * <p>
  * These must match entries exactly as they appear in pref_league_values of
  * strings.xml in order for settings to work. I will try and fix this at some
  * point
  * </p>
- * 
- * @author Barnesly
  */
 public class League {
     /*
@@ -25,5 +23,5 @@ public class League {
     public static final String MIDLANDS = "Midlands";
     public static final String WESTERN = "Western";
 
-    public static final String[] ALL_LEAGUES = { NORTHERN, SOUTHERN, MIDLANDS, WESTERN };
+    public static final String[] ALL_LEAGUES = {NORTHERN, SOUTHERN, MIDLANDS, WESTERN};
 }

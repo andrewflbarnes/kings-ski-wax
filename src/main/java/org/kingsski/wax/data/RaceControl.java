@@ -1,3 +1,5 @@
+// Kings Ski Club 2017
+
 package org.kingsski.wax.data;
 
 import org.kingsski.wax.data.dao.RaceControlDao;
@@ -6,13 +8,10 @@ import org.kingsski.wax.data.dao.RaceControlDao;
  * <p>
  * Object containing details of Race Controls. Fields are analogous with the database.
  * </p>
- * 
  * <p>
  * The {@link RaceControlDao} performs
  * retrievals into, adds from and updates from this object type.
  * </p>
- * 
- * @author Barnesly
  */
 public class RaceControl {
     private int controlId;
@@ -27,8 +26,7 @@ public class RaceControl {
     }
 
     /**
-     * @param controlId
-     *            the control ID to set
+     * @param controlId the control ID to set
      */
     public void setControlId(int controlId) {
         this.controlId = controlId;
@@ -56,8 +54,7 @@ public class RaceControl {
     }
 
     /**
-     * @param date
-     *            the date to set
+     * @param date the date to set
      */
     public void setDate(String date) {
         this.date = date;

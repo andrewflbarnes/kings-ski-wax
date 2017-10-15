@@ -1,3 +1,5 @@
+// Kings Ski Club 2017
+
 package org.kingsski.wax.data.dao;
 
 /**
@@ -14,8 +16,6 @@ package org.kingsski.wax.data.dao;
  * <li>{@link TeamDao}</li>
  * </ul>
  * </p>
- *
- * @author Barnesly
  */
 public interface DaoFactory {
 
