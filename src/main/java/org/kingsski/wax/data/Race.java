@@ -1,3 +1,5 @@
+// Kings Ski Club 2017
+
 package org.kingsski.wax.data;
 
 import org.kingsski.wax.data.dao.RaceDao;
@@ -6,12 +8,12 @@ import org.kingsski.wax.data.dao.RaceDao;
  * <p>
  * Object containing details of Races. Fields are analogous with the database.
  * </p>
- * 
+ *
  * <p>
  * The {@link RaceDao} performs
  * retrievals into, adds from and updates from this object type.
  * </p>
- * 
+ *
  * @author Barnesly
  */
 public class Race implements Comparable<Race> {

@@ -1,3 +1,5 @@
+// Kings Ski Club 2017
+
 package org.kingsski.wax.data;
 
 import org.kingsski.wax.data.dao.TeamDao;
@@ -7,12 +9,12 @@ import org.kingsski.wax.data.dao.TeamDao;
  * Object containing details of Teams. Fields are analogous with the database
  * but also contain the ordered scores for comparison purposes.
  * </p>
- * 
+ * <p>
  * <p>
  * The {@link TeamDao} performs
  * retrievals into, adds from and updates from this object type.
  * </p>
- * 
+ *
  * @author Barnesly
  */
 public class Team implements Comparable<Team> {
@@ -76,8 +78,7 @@ public class Team implements Comparable<Team> {
     }
 
     /**
-     * @param clubName
-     *            the club name to set
+     * @param clubName the club name to set
      */
     public void setClubName(String clubName) {
         this.clubName = clubName;
@@ -91,8 +92,7 @@ public class Team implements Comparable<Team> {
     }
 
     /**
-     * @param division
-     *            the division to set
+     * @param division the division to set
      */
     public void setDivision(String division) {
         this.division = division;
@@ -106,8 +106,7 @@ public class Team implements Comparable<Team> {
     }
 
     /**
-     * @param divisionIndex
-     *            the team's order within the division for the club
+     * @param divisionIndex the team's order within the division for the club
      */
     public void setDivisionIndex(int divisionIndex) {
         this.divisionIndex = divisionIndex;
@@ -121,8 +120,7 @@ public class Team implements Comparable<Team> {
     }
 
     /**
-     * @param teamName
-     *            the team name to set
+     * @param teamName the team name to set
      */
     public void setTeamName(String teamName) {
         this.teamName = teamName;
@@ -136,8 +134,7 @@ public class Team implements Comparable<Team> {
     }
 
     /**
-     * @param scoreR1
-     *            the team's score from round 1
+     * @param scoreR1 the team's score from round 1
      */
     public void setScoreR1(int scoreR1) {
         this.scoreR1 = scoreR1;
@@ -152,8 +149,7 @@ public class Team implements Comparable<Team> {
     }
 
     /**
-     * @param scoreR2
-     *            the team's score from round 2
+     * @param scoreR2 the team's score from round 2
      */
     public void setScoreR2(int scoreR2) {
         this.scoreR2 = scoreR2;
@@ -168,8 +164,7 @@ public class Team implements Comparable<Team> {
     }
 
     /**
-     * @param scoreR3
-     *            the team's score from round 3
+     * @param scoreR3 the team's score from round 3
      */
     public void setScoreR3(int scoreR3) {
         this.scoreR3 = scoreR3;
@@ -184,8 +179,7 @@ public class Team implements Comparable<Team> {
     }
 
     /**
-     * @param scoreR4
-     *            the team's score from round 4
+     * @param scoreR4 the team's score from round 4
      */
     public void setScoreR4(int scoreR4) {
         this.scoreR4 = scoreR4;
@@ -200,8 +194,7 @@ public class Team implements Comparable<Team> {
     }
 
     /**
-     * @param scoreR5
-     *            the team's score from round 5
+     * @param scoreR5 the team's score from round 5
      */
     public void setScoreR5(int scoreR5) {
         this.scoreR5 = scoreR5;
@@ -253,10 +246,9 @@ public class Team implements Comparable<Team> {
     }
 
     /**
-     * @param rounds
-     *            the number of rounds to total
+     * @param rounds the number of rounds to total
      * @return the total of the highest scores for the number of rounds
-     *         specified
+     * specified
      */
     public int getOrderedTotal(int rounds) {
         int total = 0;
@@ -284,8 +276,7 @@ public class Team implements Comparable<Team> {
     }
 
     /**
-     * @param setOneWins
-     *            the number of races this team won in set one
+     * @param setOneWins the number of races this team won in set one
      */
     public void setSetOneWins(int setOneWins) {
         this.setOneWins = setOneWins;
@@ -299,8 +290,7 @@ public class Team implements Comparable<Team> {
     }
 
     /**
-     * @param setOneDsqs
-     *            the number of races this team got DSQs for in set one
+     * @param setOneDsqs the number of races this team got DSQs for in set one
      */
     public void setSetOneDsqs(int setOneDsqs) {
         this.setOneDsqs = setOneDsqs;

@@ -1,3 +1,5 @@
+// Kings Ski Club 2017
+
 package org.kingsski.wax.export;
 
 import org.kingsski.wax.data.Race;
@@ -15,7 +17,7 @@ public interface RaceListWriter {
     /**
      * Generates a PDF containing a table of the races to be run
      *
-     * @param races The ordered list of {@link Race}s which are to be added
+     * @param races     The ordered list of {@link Race}s which are to be added
      * @param teamsList The {@link List} of {@link Team}s which will be used to lookup team names
      * @return true if the PDF was successfully generated, false otherwise
      */

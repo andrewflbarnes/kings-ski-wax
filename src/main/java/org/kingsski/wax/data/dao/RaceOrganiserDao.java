@@ -1,3 +1,5 @@
+// Kings Ski Club 2017
+
 package org.kingsski.wax.data.dao;
 
 /**
@@ -5,7 +7,7 @@ package org.kingsski.wax.data.dao;
  * A simple DAO which provides limited access and functionality on the SQLite
  * database.
  * </p>
- * 
+ * <p>
  * <p>
  * The below DAOs are extensions of this interface:
  * <ul>
@@ -15,7 +17,7 @@ package org.kingsski.wax.data.dao;
  * <li>{@link TeamDao}</li>
  * </ul>
  * </p>
- * 
+ *
  * @author Barnesly
  */
 public interface RaceOrganiserDao {
