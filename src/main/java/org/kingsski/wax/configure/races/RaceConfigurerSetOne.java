@@ -15,6 +15,8 @@ import org.kingsski.wax.data.dao.DaoFactory;
 import org.kingsski.wax.data.dao.RaceDao;
 import org.kingsski.wax.data.dao.TeamDao;
 import org.kingsski.wax.export.RaceListWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -54,6 +56,7 @@ import java.util.Map;
  * @author Barnesly
  */
 class RaceConfigurerSetOne {
+    private static final Logger LOGGER = LoggerFactory.getLogger(RaceConfigurerSetTwo.class);
     private static final int THIS_ROUND_NO = 1;
 
     private final RaceControl control;
@@ -86,7 +89,7 @@ class RaceConfigurerSetOne {
         return control;
     }
 
-    protected Boolean execute() {
+    public Boolean execute() {
         ClubDao clubDatasource = daoFactory.newClubDaoInstance();
         clubDatasource.open();
 
@@ -107,10 +110,10 @@ class RaceConfigurerSetOne {
             for (String division : Division.ALL_DIVISIONS) {
                 competingTeams = teamDatasource.getCompetingTeams(division, allClubs, league);
 
-//                Log.d(LOG_TAG, division + " teams competing:");
+                LOGGER.debug("{} teams competing:", division);
                 Collections.sort(competingTeams);
                 for (int i = 0, n = competingTeams.size(); i < n; i++) {
-//                    Log.d(LOG_TAG, competingTeams.get(i).toString());
+                    LOGGER.debug(competingTeams.get(i).toString());
                 }
 
                 allRaceGroups.add(generateRaceGroupMap(competingTeams));
@@ -131,7 +134,7 @@ class RaceConfigurerSetOne {
                     theseRaces = group.getRaces(i);
                     for (int k = 0, m = theseRaces.size(); k < m; k++) {
                         allRaces.add(theseRaces.get(k));
-//                        Log.d(LOG_TAG, "SIZE: " + theseRaces.size());
+                        LOGGER.debug("SIZE: {}", theseRaces.size());
                     }
                 }
             }
@@ -227,7 +230,7 @@ class RaceConfigurerSetOne {
 
         // Create each of the current race groups
         for (int i = 0, n = groupNames.length; i < n; i++) {
-//            Log.d(LOG_TAG, "creating race group " + groupNames[i]);
+            LOGGER.debug("creating race group {}", groupNames[i]);
 
             RaceGroup group = new RaceGroup(groupNames[i], new ArrayList<Team>(), groupGrid[i], this.control.getControlId(), THIS_ROUND_NO);
             raceGroups.put(groupNames[i], group);
@@ -269,13 +272,13 @@ class RaceConfigurerSetOne {
         for (int i = 0, n = groupNames.length; i < n; i++) {
             theseTeams = raceGroups.get(groupNames[i]).getTeams();
             for (int j = 0, m = theseTeams.size(); j < m; j++) {
-//                Log.d(LOG_TAG, theseTeams.get(j).getTeamName() + " in race group " + groupNames[i]);
+                LOGGER.debug("{} in race group {}", theseTeams.get(j).getTeamName(), groupNames[i]);
             }
 
             // Call the method to generate the races inside the RaceGroup
             raceGroups.get(groupNames[i]).initRaces();
 
-//            Log.i(LOG_TAG, "race group " + groupNames[i] + " created, initialised and added");
+            LOGGER.info("race group {} created, initialised and added", groupNames[i]);
         }
 
         return raceGroups;

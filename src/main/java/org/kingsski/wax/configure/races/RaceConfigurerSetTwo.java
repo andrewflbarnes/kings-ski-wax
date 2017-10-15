@@ -20,6 +20,8 @@ import org.kingsski.wax.data.dao.DaoFactory;
 import org.kingsski.wax.data.dao.RaceDao;
 import org.kingsski.wax.data.dao.TeamDao;
 import org.kingsski.wax.export.RaceListWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -61,6 +63,11 @@ import java.util.Map;
  * @author Barnesly
  */
 class RaceConfigurerSetTwo {
+    private static final Logger LOGGER = LoggerFactory.getLogger(RaceConfigurerSetTwo.class);
+    private static final String UNKNOWN_MARK_BOOTH = "Too many teams drawn: MASSAGE";
+    private static final int MINIMUM_SET_NO = 2;
+    private static final int MIN_SET_TWO_TEAMS = 7;
+
 	private final RaceControl control;
 	private final int raceSetNo;
     private final boolean isKnockouts;
@@ -69,10 +76,6 @@ class RaceConfigurerSetTwo {
 
     private RaceDao raceDatasource;
     private TeamDao teamDatasource;
-
-	private static final String UNKNOWN_MARK_BOOTH = "Too many teams drawn: MASSAGE";
-	private static final int MINIMUM_SET_NO = 2;
-	private static final int MIN_SET_TWO_TEAMS = 7;
 
     /**
 	 * Parameterised constructor for instantiation.
@@ -109,7 +112,7 @@ class RaceConfigurerSetTwo {
 		return control;
 	}
 
-	protected Boolean execute() {
+	public Boolean execute() {
 
 		// Create and open the DAOs for the generateRaceGroupMap method calls
 		this.teamDatasource = daoFactory.newTeamDaoInstance();
@@ -434,13 +437,13 @@ class RaceConfigurerSetTwo {
 		for (int i = 0; i < groupNames.length; i++) {
 			theseTeams = raceGroups.get(groupNames[i]).getTeams();
 			for (int j = 0, m = theseTeams.size(); j < m; j++) {
-//				Log.d(LOG_TAG, theseTeams.get(j).getTeamName() + " in race group " + groupNames[i]);
+				LOGGER.debug("{} in race group {}", theseTeams.get(j).getTeamName(), groupNames[i]);
 			}
 
 			// Call the method to generate the races inside the RaceGroup
 			raceGroups.get(groupNames[i]).initRaces();
 
-//			Log.i(LOG_TAG, "race group " + groupNames[i] + " created, initialised and added");
+			LOGGER.info("race group {} created, initialised and added", groupNames[i]);
 		}
 
 		// return the map of RaceGroups

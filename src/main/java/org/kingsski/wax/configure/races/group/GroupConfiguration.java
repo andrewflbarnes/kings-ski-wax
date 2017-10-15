@@ -8,6 +8,8 @@ import java.util.List;
 
 import org.kingsski.wax.data.Race;
 import org.kingsski.wax.data.Team;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 // TODO Move the important methods of this out to an interface
 
@@ -35,6 +37,7 @@ import org.kingsski.wax.data.Team;
  * @author Barnesly
  */
 public class GroupConfiguration {
+	private static final Logger LOGGER = LoggerFactory.getLogger(GroupConfiguration.class);
 	// Each of the race grids is composed of an array containing 3 arrays (1 per
 	// section) of race pairs - each themselves a 2 dimensional array
 	public static final GroupConfiguration TWO = new GroupConfiguration("2", new int[][][] {
@@ -154,11 +157,8 @@ public class GroupConfiguration {
 
 				races.add(race);
 
-//				Log.d(GroupConfiguration.class.toString(),
-//						"race added for control id " + controlId
-//								+ ", division " + division + ", round number "
-//								+ roundNo + ", teams " + race.getTeamOne()
-//								+ " " + race.getTeamTwo());
+				LOGGER.debug("race added for control id {}, division {}, round number {}, teams {} {}",
+						controlId, division, roundNo, race.getTeamOne(), race.getTeamTwo());
 			}
 		}
 
