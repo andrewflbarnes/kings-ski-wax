@@ -1,10 +1,5 @@
 package org.kingsski.wax.data;
 
-import android.annotation.SuppressLint;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.support.annotation.NonNull;
-
 import org.kingsski.wax.data.dao.RaceDao;
 
 /**
@@ -17,13 +12,9 @@ import org.kingsski.wax.data.dao.RaceDao;
  * retrievals into, adds from and updates from this object type.
  * </p>
  * 
- * <p>
- * Implements the {@link Parcelable} interface
- * </p>
- * 
  * @author Barnesly
  */
-public class Race implements Comparable<Race>, Parcelable {
+public class Race implements Comparable<Race> {
     private static final String[] groups = { "A", "E", "B", "F", "C", "G", "D",
             "H", "I", "II", "III", "IV", "V", "VI", "VII", "VIII" };
     private int controlId;
@@ -42,24 +33,6 @@ public class Race implements Comparable<Race>, Parcelable {
      */
     public Race() {
         // Empty default constructor
-    }
-
-    /**
-     * {@link Parcelable} constructor
-     *
-     * @param in Create a new instance using a {@link Parcel}
-     */
-    public Race(Parcel in) {
-        this.controlId = in.readInt();
-        this.division = in.readString();
-        this.roundNo = in.readInt();
-        this.raceNo = in.readInt();
-        this.group = in.readString();
-        this.teamOne = in.readInt();
-        this.teamTwo = in.readInt();
-        this.teamWin = in.readInt();
-        this.teamOneDSQ = in.readString();
-        this.teamTwoDSQ = in.readString();
     }
 
     /**
@@ -218,9 +191,8 @@ public class Race implements Comparable<Race>, Parcelable {
     /* (non-Javadoc)
      * @see java.lang.Comparable#compareTo(java.lang.Object)
      */
-    @SuppressLint("DefaultLocale")
     @Override
-    public int compareTo(@NonNull Race another) {
+    public int compareTo(Race another) {
         // Order by the division, then group ID, then race number finally
 
         int check = this.division.toUpperCase().toCharArray()[0] - another.division.toUpperCase().toCharArray()[0];
@@ -245,54 +217,6 @@ public class Race implements Comparable<Race>, Parcelable {
 
         return check;
     }
-
-    /* (non-Javadoc)
-     * @see android.os.Parcelable#describeContents()
-     */
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    /* (non-Javadoc)
-     * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
-     */
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(controlId);
-        dest.writeString(division);
-        dest.writeInt(roundNo);
-        dest.writeInt(raceNo);
-        dest.writeString(group);
-        dest.writeInt(teamOne);
-        dest.writeInt(teamTwo);
-        dest.writeInt(teamWin);
-        dest.writeString(teamOneDSQ);
-        dest.writeString(teamTwoDSQ);
-    }
-
-    /**
-     * Instantiates the necessary {@code static} {@link Parcelable.Creator}
-     */
-    public static final Parcelable.Creator<Race> CREATOR = new Parcelable.Creator<Race>() {
-
-        /* (non-Javadoc)
-         * @see android.os.Parcelable.Creator#createFromParcel(android.os.Parcel)
-         */
-        @Override
-        public Race createFromParcel(Parcel source) {
-            return new Race(source);
-        }
-
-        /* (non-Javadoc)
-         * @see android.os.Parcelable.Creator#newArray(int)
-         */
-        @Override
-        public Race[] newArray(int size) {
-            return new Race[size];
-        }
-
-    };
 
     /* (non-Javadoc)
      * @see java.lang.Object#toString()

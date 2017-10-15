@@ -17,8 +17,7 @@ public interface RaceListWriter {
      *
      * @param races The ordered list of {@link Race}s which are to be added
      * @param teamsList The {@link List} of {@link Team}s which will be used to lookup team names
-     * @param outputFile The file to output to
      * @return true if the PDF was successfully generated, false otherwise
      */
-    boolean writeRaceList(List<Race> races, List<Team> teamsList, File outputFile, String encoding);
+    boolean writeRaceList(List<Race> races, List<Team> teamsList);
 }

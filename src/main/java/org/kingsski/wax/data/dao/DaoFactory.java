@@ -1,7 +1,5 @@
 package org.kingsski.wax.data.dao;
 
-import android.content.Context;
-
 /**
  * <p>
  * An interface for a factory which returns instances of DAOs required by the race organiser.
@@ -22,42 +20,27 @@ import android.content.Context;
 public interface DaoFactory {
 
     /**
-     * @param context
-     *            The {@link Context} to associate with the new {@link RaceOrganiserDao}
-     *            instance.
      * @return An implementation of {@link RaceOrganiserDao}
      */
-    RaceOrganiserDao newRaceOrganiserDaoInstance(Context context);
+    RaceOrganiserDao newRaceOrganiserDaoInstance();
 
     /**
-     * @param context
-     *            The {@link Context} to associate with the new {@link RaceDao}
-     *            instance.
      * @return An implementation of {@link RaceDao}
      */
-    RaceDao newRaceDaoInstance(Context context);
+    RaceDao newRaceDaoInstance();
 
     /**
-     * @param context
-     *            The {@link Context} to associate with the new {@link ClubDao}
-     *            instance.
      * @return An implementation of {@link ClubDao}
      */
-    ClubDao newClubDaoInstance(Context context);
+    ClubDao newClubDaoInstance();
 
     /**
-     * @param context
-     *            The {@link Context} to associate with the new {@link RaceControlDao}
-     *            instance.
      * @return An implementation of {@link RaceControlDao}
      */
-    RaceControlDao newRaceControlDaoInstance(Context context);
+    RaceControlDao newRaceControlDaoInstance();
 
     /**
-     * @param context
-     *            The {@link Context} to associate with the new {@link TeamDao}
-     *            instance.
      * @return An implementation of {@link TeamDao}
      */
-    TeamDao newTeamDaoInstance(Context context);
+    TeamDao newTeamDaoInstance();
 }

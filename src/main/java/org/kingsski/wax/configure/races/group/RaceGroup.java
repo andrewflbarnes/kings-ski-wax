@@ -1,15 +1,13 @@
 package org.kingsski.wax.configure.races.group;
 
-import android.util.Log;
-import android.util.SparseArray;
-import android.util.SparseIntArray;
-
 import org.kingsski.wax.data.Race;
 import org.kingsski.wax.data.Team;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This class is equivalent to the Tables configuration in the excel cheat sheet
@@ -164,23 +162,23 @@ public class RaceGroup {
 	 */
 	public boolean initRaces() {
 		if (this.configuration == null) {
-			Log.w(RaceGroup.class.toString(), "group configuration not set");
+//			Log.w(RaceGroup.class.toString(), "group configuration not set");
 			return false;
 		}
 		if (this.teams == null || !hasFullTeamList()) {
-			Log.w(RaceGroup.class.toString(), "teams not set");
+//			Log.w(RaceGroup.class.toString(), "teams not set");
 			return false;
 		}
 		if (this.controlId < 1) {
-			Log.w(RaceGroup.class.toString(), "control ID not set");
+//			Log.w(RaceGroup.class.toString(), "control ID not set");
 			return false;
 		}
 		if (this.roundNo < 1) {
-			Log.w(RaceGroup.class.toString(), "round number not set");
+//			Log.w(RaceGroup.class.toString(), "round number not set");
 			return false;
 		}
 		if (this.groupName == null || this.groupName.isEmpty()) {
-			Log.w(RaceGroup.class.toString(), "group name not set");
+//			Log.w(RaceGroup.class.toString(), "group name not set");
 			return false;
 		}
 
@@ -235,7 +233,7 @@ public class RaceGroup {
 		List<Team> teamWinsAndDsqs = new ArrayList<Team>();
 		int oldScore;
 
-		SparseArray<Team> allTeams = new SparseArray<Team>(this.teams.size());
+		Map<Integer, Team> allTeams = new HashMap(this.teams.size());
 		Team objTeam;
 		for (int i = 0, n = teams.size(); i < n; i++) {
 			objTeam = teams.get(i);
@@ -244,8 +242,8 @@ public class RaceGroup {
 
 		// TODO Do we need these SparseIntArrays? I suspect not
 		// Get a list of unique teams competing
-		SparseIntArray teamWins = new SparseIntArray(6);
-		SparseIntArray teamDsqs = new SparseIntArray(6);
+		Map<Integer, Integer> teamWins = new HashMap<>(6);
+		Map<Integer, Integer> teamDsqs = new HashMap(6);
 		int team;
 		Race race;
 
@@ -260,10 +258,10 @@ public class RaceGroup {
 				}
 
 				// Ensure that the team is added (in the case of no wins)
-				if (teamWins.get(team, TEAM_NOT_FOUND) == TEAM_NOT_FOUND) {
+				if (teamWins.getOrDefault(team, TEAM_NOT_FOUND) == TEAM_NOT_FOUND) {
 					teamWins.put(team, 0);
 				}
-				if (teamDsqs.get(team, TEAM_NOT_FOUND) == TEAM_NOT_FOUND) {
+				if (teamDsqs.getOrDefault(team, TEAM_NOT_FOUND) == TEAM_NOT_FOUND) {
 					teamDsqs.put(team, 0);
 				}
 
@@ -286,9 +284,9 @@ public class RaceGroup {
 
 		}
 
-		int key;
-		for (int i = 0, n = teamWins.size(); i < n; i++) {
-			key = teamWins.keyAt(i);
+		for (int key : teamWins.keySet()) {
+//		for (int i = 0, n = teamWins.size(); i < n; i++) {
+//			key = teamWins.keyAt(i);
 			objTeam = allTeams.get(key);
 			objTeam.setSetOneWins(teamWins.get(key));
 			objTeam.setSetOneDsqs(teamDsqs.get(key));
@@ -643,9 +641,9 @@ public class RaceGroup {
 		final int roundNo = races.get(0).getRoundNo();
 
 		// Store the team list as a sparse array to make it easier to retrieve teams by their ID
-		SparseArray<Team> teamArray = new SparseArray<Team>(teams.size());
+		Map<Integer, Team> teamArray = new HashMap<>(teams.size());
 		for (int i = 0, n = teams.size(); i < n; i++) {
-			teamArray.append(teams.get(i).getTeamId(), teams.get(i));
+			teamArray.put(teams.get(i).getTeamId(), teams.get(i));
 		}
 
 		String raceGroupName;

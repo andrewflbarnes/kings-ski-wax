@@ -1,8 +1,5 @@
 package org.kingsski.wax.data;
 
-import android.annotation.SuppressLint;
-import android.support.annotation.NonNull;
-
 import org.kingsski.wax.data.dao.TeamDao;
 
 /**
@@ -377,9 +374,8 @@ public class Team implements Comparable<Team> {
     /* (non-Javadoc)
      * @see java.lang.Comparable#compareTo(java.lang.Object)
      */
-    @SuppressLint("DefaultLocale")
     @Override
-    public int compareTo(@NonNull Team another) {
+    public int compareTo(Team another) {
         int check;
 
         // Largest first so reverse the compare

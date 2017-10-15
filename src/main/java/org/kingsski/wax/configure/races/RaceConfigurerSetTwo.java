@@ -3,13 +3,6 @@
  */
 package org.kingsski.wax.configure.races;
 
-import android.content.Context;
-import android.os.AsyncTask;
-import android.os.Environment;
-import android.support.v4.util.ArrayMap;
-import android.util.Log;
-import android.widget.Toast;
-
 import org.kingsski.wax.configure.races.division.DivisionConfiguration;
 import org.kingsski.wax.configure.races.division.DivisionConfiguration.InvalidNumberOfTeamsException;
 import org.kingsski.wax.configure.races.division.impl.DivisionConfigurationKnockout;
@@ -28,15 +21,12 @@ import org.kingsski.wax.data.dao.RaceDao;
 import org.kingsski.wax.data.dao.TeamDao;
 import org.kingsski.wax.export.RaceListWriter;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 // TODO Rename this class, it is actually a configurer for any set which is not the first.
 // TODO Fix copypasta javadoc for the class
@@ -70,60 +60,39 @@ import java.util.Map;
  *
  * @author Barnesly
  */
-class RaceConfigurerSetTwo extends AsyncTask<Void, String, Boolean> {
-	// private static final String LOG_TAG = RaceConfigurer.class.toString();
-	private RaceControl control;
-	private Context context;
-	private RaceDao raceDatasource;
-	private TeamDao teamDatasource;
-	private int raceSetNo;
-    private boolean isKnockouts;
-    private RaceListWriter writer;
+class RaceConfigurerSetTwo {
+	private final RaceControl control;
+	private final int raceSetNo;
+    private final boolean isKnockouts;
+    private final RaceListWriter writer;
+    private final DaoFactory daoFactory;
 
-    private static final DaoFactory daoFactory = KingsDaoHelper.getDaoFactoryInstance();
-	private static final String LOG_TAG = RaceConfigurerSetTwo.class.toString();
+    private RaceDao raceDatasource;
+    private TeamDao teamDatasource;
+
 	private static final String UNKNOWN_MARK_BOOTH = "Too many teams drawn: MASSAGE";
 	private static final int MINIMUM_SET_NO = 2;
 	private static final int MIN_SET_TWO_TEAMS = 7;
-    private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy_MM_dd", Locale.UK);
 
     /**
 	 * Parameterised constructor for instantiation.
 	 *
-	 * @param context
-	 *            the {@link Context} to associate with this object
-	 * @param control
 	 *            the {@link RaceControl} to configure the races for
      * @param raceSetNo
      *            the number of the set to generate races for
      * @param isKnockouts
      *            true if this round is the final knockout set for determining team position
 	 */
-    public RaceConfigurerSetTwo(Context context, RaceListWriter writer, RaceControl control, int raceSetNo, boolean isKnockouts) {
+    public RaceConfigurerSetTwo(DaoFactory daoFactory, RaceListWriter writer, RaceControl control, int raceSetNo, boolean isKnockouts) {
         if (raceSetNo < MINIMUM_SET_NO){
             throw new SetNumberTooLowException("Param raceSetNo (" + raceSetNo + ") must be " +
                     MINIMUM_SET_NO + " or higher");
         }
         this.control = control;
         this.writer = writer;
-        this.context = context;
 		this.raceSetNo = raceSetNo;
         this.isKnockouts = isKnockouts;
-	}
-
-	/**
-	 * @return the {@link Context} associate with this task
-	 */
-	public Context getContext() {
-		return context;
-	}
-
-	/**
-	 * @param context
-	 *            the {@link Context} to associate with this task
-	 */
-	public void setContext(Context context) {
-		this.context = context;
+        this.daoFactory = daoFactory;
 	}
 
     /**
@@ -134,40 +103,18 @@ class RaceConfigurerSetTwo extends AsyncTask<Void, String, Boolean> {
     }
 
     /**
-     * @param writer the {@link RaceListWriter} instance which writes races out to file
-     */
-    public void setWriter(RaceListWriter writer) {
-        this.writer = writer;
-    }
-
-    /**
 	 * @return the {@link RaceControl} which configuration will be created for
 	 */
 	public RaceControl getControl() {
 		return control;
 	}
 
-	/**
-	 * @param control
-	 *            the {@link RaceControl} object for which configuration will be
-	 *            created for
-	 */
-	public void setControl(RaceControl control) {
-		this.control = control;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see android.os.AsyncTask#doInBackground(java.lang.Object[])
-	 */
-	@Override
-	protected Boolean doInBackground(Void... params) {
+	protected Boolean execute() {
 
 		// Create and open the DAOs for the generateRaceGroupMap method calls
-		this.teamDatasource = daoFactory.newTeamDaoInstance(this.context);
+		this.teamDatasource = daoFactory.newTeamDaoInstance();
 		this.teamDatasource.open();
-		this.raceDatasource = daoFactory.newRaceDaoInstance(this.context);
+		this.raceDatasource = daoFactory.newRaceDaoInstance();
 		this.raceDatasource.open();
 
 		List<Map<String, RaceGroup>> allRaceGroups = new ArrayList<>(3);
@@ -176,7 +123,7 @@ class RaceConfigurerSetTwo extends AsyncTask<Void, String, Boolean> {
 			allRaceGroups.add(generateRaceGroupMap(Division.LADIES));
 			allRaceGroups.add(generateRaceGroupMap(Division.BOARD));
 		} catch (RaceGenerationFailException e) {
-			publishProgress(e.getMessage());
+//			publishProgress(e.getMessage());
 			return Boolean.FALSE;
 		}
 
@@ -188,7 +135,7 @@ class RaceConfigurerSetTwo extends AsyncTask<Void, String, Boolean> {
 			racesToRun += allRaceGroups.get(i).size();
 		}
 		if (racesToRun < 1) {
-			publishProgress("No races created!");
+//			publishProgress("No races created!");
 			return Boolean.FALSE;
 		}
 
@@ -255,23 +202,7 @@ class RaceConfigurerSetTwo extends AsyncTask<Void, String, Boolean> {
 		this.raceDatasource.setTransactionSuccessful();
 		this.raceDatasource.endTransaction();
 
-        // Check that the public external storage is writable
-        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-            String pdf = DATE_FORMATTER.format(new Date()) + "_kings_races_set_2_" + System.currentTimeMillis() + ".pdf";
-            /*
-             * Dies:
-             * new File(Environment.getExternalStoragePublicDirectory("Race_Lists"), pdf)
-             * Good:
-             * new File(context.getExternalFilesDir("Race_Lists"), pdf);
-             * new File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), pdf);
-             * new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), pdf)
-             */
-            File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), pdf);
-            writer.writeRaceList(allRaces, this.teamDatasource.getTeams(null, null, null), file, "UTF-8");
-        } else {
-            Log.e(LOG_TAG, "External media is not in a writable state");
-            publishProgress("Unable to create PDF!");
-        }
+		writer.writeRaceList(allRaces, this.teamDatasource.getTeams(null, null, null));
 
         this.teamDatasource.close();
         this.raceDatasource.close();
@@ -331,34 +262,6 @@ class RaceConfigurerSetTwo extends AsyncTask<Void, String, Boolean> {
 	}
 
 	/**
-	 * This method is overriden specifically to display any error message as a
-	 * {@link Toast} prior to the execute method failing as a result of a
-	 * handling a caught exception or other error.
-	 *
-	 * @see android.os.AsyncTask#onProgressUpdate(java.lang.Object[])
-	 */
-	@Override
-	protected void onProgressUpdate(String... messages) {
-		Toast.makeText(getContext(), messages[0], Toast.LENGTH_LONG).show();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
-	 */
-	@Override
-	protected void onPostExecute(Boolean success) {
-		if (success) {
-			Toast.makeText(getContext(), "Race configuration completed",
-					Toast.LENGTH_LONG).show();
-		} else {
-			Toast.makeText(getContext(), "Race configuration failed!",
-					Toast.LENGTH_LONG).show();
-		}
-	}
-
-	/**
 	 * Returns a mapping of {@link Team}s with using their position within the group and the
 	 * group letter as the key. This allows races to be determined from the transformation mapping
 	 * provided by the corresponding {@link DivisionConfiguration} implementation.
@@ -373,7 +276,7 @@ class RaceConfigurerSetTwo extends AsyncTask<Void, String, Boolean> {
 	private static Map<String, Team> getOrderedTeamMap(List<RaceGroup> raceGroups)
 			throws RacesUnfinishedException, MarkBoothException {
 		// Initialise the Map we are returning
-		Map<String, Team> orderedTeamMap = new ArrayMap<>();
+		Map<String, Team> orderedTeamMap = new HashMap<>();
 
 		// Variable declarations for processing
 		String groupName;
@@ -500,7 +403,7 @@ class RaceConfigurerSetTwo extends AsyncTask<Void, String, Boolean> {
         int controlId = this.control.getControlId();
 
 		// Initialise the map we are returning
-		ArrayMap<String, RaceGroup> raceGroups = new ArrayMap<>(groupNames.length);
+		Map<String, RaceGroup> raceGroups = new HashMap<>(groupNames.length);
 
 		// If there are no races to run (sero length groupNames array or a zero length groupGrid
 		// array or zero length transformationMapping array) return the empty map
@@ -531,13 +434,13 @@ class RaceConfigurerSetTwo extends AsyncTask<Void, String, Boolean> {
 		for (int i = 0; i < groupNames.length; i++) {
 			theseTeams = raceGroups.get(groupNames[i]).getTeams();
 			for (int j = 0, m = theseTeams.size(); j < m; j++) {
-				Log.d(LOG_TAG, theseTeams.get(j).getTeamName() + " in race group " + groupNames[i]);
+//				Log.d(LOG_TAG, theseTeams.get(j).getTeamName() + " in race group " + groupNames[i]);
 			}
 
 			// Call the method to generate the races inside the RaceGroup
 			raceGroups.get(groupNames[i]).initRaces();
 
-			Log.i(LOG_TAG, "race group " + groupNames[i] + " created, initialised and added");
+//			Log.i(LOG_TAG, "race group " + groupNames[i] + " created, initialised and added");
 		}
 
 		// return the map of RaceGroups

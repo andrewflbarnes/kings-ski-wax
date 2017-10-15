@@ -3,10 +3,9 @@
  */
 package org.kingsski.wax.configure.races;
 
-import android.content.Context;
-import android.widget.Toast;
-
 import org.kingsski.wax.data.RaceControl;
+import org.kingsski.wax.data.dao.DaoFactory;
+import org.kingsski.wax.export.RaceListWriter;
 
 /**
  * <p>
@@ -25,42 +24,40 @@ import org.kingsski.wax.data.RaceControl;
  * corresponding control id and league.</li>
  * </ol>
  * </p>
- * 
+ *
  * @author Barnesly
  *
  */
 public class RaceConfigurer {
-	
+
 	/**
 	 * Generates the races for the required set under the control id and league
 	 * in the {@link RaceControl} parameter.
-	 * 
-	 * @param context
-	 *            The context which DAO related activities will use.
+	 *
 	 * @param control
 	 *            The {@link RaceControl} containing the league and control id
 	 *            for race generation is required.
 	 * @param raceSet
 	 *            Which set of races need to be generated.
 	 */
-	public static void generateRaces(final Context context, final RaceControl control, final int raceSet, boolean isKnockouts) {
+	public static void generateRaces(final DaoFactory daoFactory, final RaceListWriter writer, final RaceControl control, final int raceSet, boolean isKnockouts) {
 		switch (raceSet){
 		case 1:
-    		new RaceConfigurerSetOne(context, new RaceListWriterAndroidPdf(), control).execute();
+    		new RaceConfigurerSetOne(daoFactory, writer, control).execute();
 			break;
 		case 2:
 		case 3:
-			new RaceConfigurerSetTwo(context, new RaceListWriterAndroidPdf(), control, raceSet, isKnockouts).execute();
+			new RaceConfigurerSetTwo(daoFactory, writer, control, raceSet, isKnockouts).execute();
 			break;
 		default:
 			throw new InvalidSetException("Invalid race set: " + String.valueOf(raceSet));
 		}
-		
+
 	}
-	
+
 	/**
 	 * Exception thrown when an invalid round number is passed for configuration
-	 * 
+	 *
 	 * @author Barnesly
 	 */
 	public static class InvalidSetException extends RuntimeException  {
@@ -68,7 +65,7 @@ public class RaceConfigurer {
 
 		/**
 		 * Constructor
-		 * 
+		 *
 		 * @param reason
 		 *            The reason the exception was raised
 		 */
