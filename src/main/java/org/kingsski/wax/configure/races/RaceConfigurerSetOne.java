@@ -30,22 +30,18 @@ import java.util.Map;
 /**
  * <p>
  * Class for creating the initial configuration and races based on the settings
- * for each {@link Club} as set in the database. This is a somewhat intensive
- * task and as runs in its own thread.
+ * for each {@link Club} as set in the database.
  * </p>
- * <p>
  * <p>
  * Note that this class is package-private and should be utilised through the
  * {@link RaceConfigurer#generateRaces} method.
  * </p>
- * <p>
  * <p>
  * When executed this task retrieves all clubs under the current set league from
  * the database. For each division it then retrieves all competing teams
  * (creating those which don't already exist), ordering by highest seeded first
  * then alphabetically for unseeded.
  * </p>
- * <p>
  * <p>
  * For each set of {@link Team}s a {@link DivisionConfigurationSetOne} object is used
  * to create the corresponding {@link RaceGroup}s. The total overall ordered
@@ -54,8 +50,6 @@ import java.util.Map;
  * corresponding races. Finally, this list of races is saved in order to the
  * database.
  * </p>
- *
- * @author Barnesly
  */
 class RaceConfigurerSetOne {
     private static final Logger LOGGER = LoggerFactory.getLogger(RaceConfigurerSetTwo.class);
@@ -66,9 +60,11 @@ class RaceConfigurerSetOne {
     private final DaoFactory daoFactory;
 
     /**
-     * Parameterised constructor for instantiation.
+     * Standard constructor
      *
-     * @param control the {@link RaceControl} to configure the races for
+     * @param daoFactory The {@link DaoFactory} which will provide DAOs to this instance
+     * @param writer     The {@link RaceListWriter} which will produce a file containing these races
+     * @param control    The {@link RaceControl} for the races we are generating
      */
     public RaceConfigurerSetOne(DaoFactory daoFactory, RaceListWriter writer, RaceControl control) {
         this.control = control;
@@ -90,6 +86,12 @@ class RaceConfigurerSetOne {
         return control;
     }
 
+    /**
+     * Creates the first set of races using the {@link RaceControl}, {@link RaceListWriter} and {@link DaoFactory}
+     * provided in the constructor
+     *
+     * @return true if the races were successfully created and written to file, false otherwise
+     */
     public Boolean execute() {
         ClubDao clubDatasource = daoFactory.newClubDaoInstance();
         clubDatasource.open();
@@ -171,7 +173,6 @@ class RaceConfigurerSetOne {
      * {@link Team}s.
      * </p>
      * <p>
-     * <p>
      * The method first creates the required number of {@link RaceGroup}s, and
      * adds them to a map under the appropriate group name (A..H for round 1,
      * I..VIII for round 2). Teams are then added to each group (highest seeded
@@ -184,6 +185,7 @@ class RaceConfigurerSetOne {
      * available team if there is space</li>
      * <li>Go back to 1</li>
      * </ol>
+     * </p>
      * <p>
      * For example with 8 teams the below groups would be generated:
      * <ul>
@@ -194,6 +196,7 @@ class RaceConfigurerSetOne {
      * <li>6th team</li>
      * <li>7th team</li>
      * </ul>
+     * </p>
      * <p>
      * Group B
      * <ul>
@@ -201,13 +204,14 @@ class RaceConfigurerSetOne {
      * <li>5th team</li>
      * <li>8th team</li>
      * </ul>
+     * </p>
      * <p>
      * Group C
      * <ul>
      * <li>3rd team</li>
      * <li>4th team</li>
      * </ul>
-     * <p>
+     * </p>
      * </ul>
      * </p>
      *

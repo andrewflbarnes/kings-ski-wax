@@ -18,13 +18,11 @@ import org.slf4j.LoggerFactory;
  * division and returns the corresponding {@link Race}s they will compete in.
  * </p>
  * <p>
- * <p>
  * Each enumerated GroupConfiguration is associated with a multi-dimensional
  * numeric array which defines the races which must be run.For all intents and
  * purposes this is merely an array of numeric pairs (stored as an array), 1 for
  * each race.
  * </p>
- * <p>
  * <p>
  * This array itself is split into 3 sections since each round is split into 3
  * sections (as we run a mix of races i.e. MLBMLBMLB). This simplifies the
@@ -32,8 +30,6 @@ import org.slf4j.LoggerFactory;
  * retrieve the race grid and determine how many races are required for each
  * section and which races these are.
  * </p>
- *
- * @author Barnesly
  */
 public class GroupConfiguration {
     private static final Logger LOGGER = LoggerFactory.getLogger(GroupConfiguration.class);

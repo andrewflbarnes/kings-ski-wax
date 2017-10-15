@@ -9,7 +9,7 @@ import java.util.Collections;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by Barnesly on 17/12/15.
+ * Test class for {@link Team}
  */
 public class TeamTest {
     private static final int SCORE_FIRST = 10000;

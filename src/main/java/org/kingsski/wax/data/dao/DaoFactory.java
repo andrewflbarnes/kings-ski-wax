@@ -16,8 +16,6 @@ package org.kingsski.wax.data.dao;
  * <li>{@link TeamDao}</li>
  * </ul>
  * </p>
- *
- * @author Barnesly
  */
 public interface DaoFactory {
 

@@ -9,12 +9,9 @@ import org.kingsski.wax.data.dao.ClubDao;
  * Object containing details of Clubs. Fields are analogous with the database.
  * </p>
  * <p>
- * <p>
  * The {@link ClubDao} performs
  * retrievals into, adds from and updates from this object type.
  * </p>
- *
- * @author Barnesly
  */
 public class Club {
     private String clubName;

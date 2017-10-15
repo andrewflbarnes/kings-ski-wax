@@ -29,8 +29,6 @@ import org.slf4j.LoggerFactory;
  * run (only seeding), there is no transformation mapping provided by {@link
  * #getTransformationMapping()}, this simply returns null.
  * </p>
- *
- * @author Barnesly
  */
 public class DivisionConfigurationSetOne implements DivisionConfiguration {
     private static final Logger LOGGER = LoggerFactory.getLogger(DivisionConfigurationSetOne.class);
@@ -46,7 +44,7 @@ public class DivisionConfigurationSetOne implements DivisionConfiguration {
      * </p>
      *
      * @param numTeams the number of {@link Team}s competing
-     * @throws InvalidNumberOfTeamsException
+     * @throws InvalidNumberOfTeamsException If this {@link DivisionConfiguration} is not applicable for the number of teams specified
      */
     public DivisionConfigurationSetOne(final int numTeams) throws InvalidNumberOfTeamsException {
         // Call the setTeams method as this does some configuration stuff

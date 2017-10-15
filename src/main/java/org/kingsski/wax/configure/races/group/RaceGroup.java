@@ -15,8 +15,6 @@ import java.util.Map;
 
 /**
  * This class is equivalent to the Tables configuration in the excel cheat sheet
- *
- * @author Barnesly
  */
 public class RaceGroup {
     private static final Logger LOGGER = LoggerFactory.getLogger(RaceGroup.class);
@@ -505,8 +503,6 @@ public class RaceGroup {
     /**
      * Unchecked exception thrown when a {@link Race} object cannot be retrieved
      * or found
-     *
-     * @author Barnesly
      */
     public class RaceNotFoundException extends IllegalStateException {
         private static final long serialVersionUID = 1L;
@@ -535,8 +531,6 @@ public class RaceGroup {
      * This is thrown by the {@code compare()} of
      * {@link RaceGroup#getSetOneTeamOrder()} must be caught and chained to a
      * checked {@link RacesUnfinishedException}
-     *
-     * @author Barnesly
      */
     private class RaceNotRunException extends Exception {
         private static final long serialVersionUID = 1L;
@@ -554,8 +548,6 @@ public class RaceGroup {
     /**
      * Checked exception thrown when a {@link Race} we try and process races for
      * the next set but there are unfinished/unrun races
-     *
-     * @author Barnesly
      */
     public class RacesUnfinishedException extends Exception {
         private static final long serialVersionUID = 1L;
@@ -582,8 +574,6 @@ public class RaceGroup {
     /**
      * Checked exception thrown when a there are more than 3 drawn teams in this
      * group of races
-     *
-     * @author Barnesly
      */
     public class MarkBoothException extends Exception {
         private static final long serialVersionUID = 1L;

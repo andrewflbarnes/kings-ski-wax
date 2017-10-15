@@ -8,7 +8,6 @@ package org.kingsski.wax.data.dao;
  * database.
  * </p>
  * <p>
- * <p>
  * The below DAOs are extensions of this interface:
  * <ul>
  * <li>{@link ClubDao}</li>
@@ -17,8 +16,6 @@ package org.kingsski.wax.data.dao;
  * <li>{@link TeamDao}</li>
  * </ul>
  * </p>
- *
- * @author Barnesly
  */
 public interface RaceOrganiserDao {
 

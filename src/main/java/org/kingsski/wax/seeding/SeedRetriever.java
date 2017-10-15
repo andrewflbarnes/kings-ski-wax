@@ -8,8 +8,6 @@ import java.util.List;
 
 /**
  * Defines an interface for the retrieval of {@link Team}s and their seeding information
- * <p>
- * Created by Barnesly on 09/05/2017.
  */
 public interface SeedRetriever {
 

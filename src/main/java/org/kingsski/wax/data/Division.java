@@ -5,8 +5,6 @@ package org.kingsski.wax.data;
 /**
  * Simple class used as a central place for referencing each division. Division
  * are not currently stored in the database hence why they are set here.
- *
- * @author Barnesly
  */
 public class Division {
     public static final String MIXED = "Mixed";
@@ -20,8 +18,6 @@ public class Division {
 
     /**
      * <b>Don't use these!</b> They have not been implemented anywhere.
-     *
-     * @author Barnesly
      */
     public enum DIVISIONS {
         MIXED("Mixed"),

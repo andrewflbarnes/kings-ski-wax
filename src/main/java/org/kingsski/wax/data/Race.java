@@ -13,8 +13,6 @@ import org.kingsski.wax.data.dao.RaceDao;
  * The {@link RaceDao} performs
  * retrievals into, adds from and updates from this object type.
  * </p>
- *
- * @author Barnesly
  */
 public class Race implements Comparable<Race> {
     private static final String[] groups = { "A", "E", "B", "F", "C", "G", "D",

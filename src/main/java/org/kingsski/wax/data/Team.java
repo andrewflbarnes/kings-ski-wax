@@ -10,12 +10,9 @@ import org.kingsski.wax.data.dao.TeamDao;
  * but also contain the ordered scores for comparison purposes.
  * </p>
  * <p>
- * <p>
  * The {@link TeamDao} performs
  * retrievals into, adds from and updates from this object type.
  * </p>
- *
- * @author Barnesly
  */
 public class Team implements Comparable<Team> {
     private int teamId;

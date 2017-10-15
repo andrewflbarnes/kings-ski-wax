@@ -13,10 +13,8 @@ import java.util.List;
  */
 
 /**
- * Defines an interface for the persistence of (@link Team}s and their seeding information utilised
+ * Defines an interface for the persistence of {@link Team}s and their seeding information utilised
  * by the {@link SeedRetrieverPersisterManager}.
- * <p>
- * Created by Barnesly on 09/05/2017.
  */
 public interface SeedPersister {
 

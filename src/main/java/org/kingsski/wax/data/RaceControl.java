@@ -9,12 +9,9 @@ import org.kingsski.wax.data.dao.RaceControlDao;
  * Object containing details of Race Controls. Fields are analogous with the database.
  * </p>
  * <p>
- * <p>
  * The {@link RaceControlDao} performs
  * retrievals into, adds from and updates from this object type.
  * </p>
- *
- * @author Barnesly
  */
 public class RaceControl {
     private int controlId;

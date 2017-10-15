@@ -17,14 +17,12 @@ import org.kingsski.wax.export.RaceListWriter;
  * <ol>
  * <li>
  * Races are generated based on the number of teams currently set for each club
- * in the CLUBS table under the corresponding control id and league.</li>
+ * under the corresponding control id and league.</li>
  * <li>
  * Races are generated based on the results of the first set of races under the
  * corresponding control id and league.</li>
  * </ol>
  * </p>
- *
- * @author Barnesly
  */
 public class RaceConfigurer {
 
@@ -32,9 +30,12 @@ public class RaceConfigurer {
      * Generates the races for the required set under the control id and league
      * in the {@link RaceControl} parameter.
      *
-     * @param control The {@link RaceControl} containing the league and control id
-     *                for race generation is required.
-     * @param raceSet Which set of races need to be generated.
+     * @param daoFactory  The {@link DaoFactory} which will provide DAOs to this instance
+     * @param writer      The {@link RaceListWriter} which will produce a file containing the races
+     * @param control     The {@link RaceControl} containing the league and control id
+     *                    for race generation is required.
+     * @param raceSet     Which set of races need to be generated (i.e. 1, 2 or 3)
+     * @param isKnockouts true if this is a knockout set, false otherwise
      */
     public static void generateRaces(final DaoFactory daoFactory, final RaceListWriter writer, final RaceControl control, final int raceSet, boolean isKnockouts) {
         switch (raceSet) {
@@ -52,9 +53,7 @@ public class RaceConfigurer {
     }
 
     /**
-     * Exception thrown when an invalid round number is passed for configuration
-     *
-     * @author Barnesly
+     * Unchecked exception thrown when an invalid round number is passed for configuration
      */
     public static class InvalidSetException extends RuntimeException {
         private static final long serialVersionUID = 1L;

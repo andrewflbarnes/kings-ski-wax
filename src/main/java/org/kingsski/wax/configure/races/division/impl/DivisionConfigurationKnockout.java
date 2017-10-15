@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author Barnesly.
+ * An implementation of {@link DivisionConfiguration} for knockout rounds
  */
 public class DivisionConfigurationKnockout implements DivisionConfiguration {
     private static final Logger LOGGER = LoggerFactory.getLogger(DivisionConfigurationKnockout.class);
@@ -17,6 +17,12 @@ public class DivisionConfigurationKnockout implements DivisionConfiguration {
     private String[] groupNames;
     private String[][] transformationMapping;
 
+    /**
+     * Constructor which sets the nuumber of teams competing in the division. Calls {@link #setTeams(int)}
+     *
+     * @param numTeams The number of teams competing
+     * @throws InvalidNumberOfTeamsException If this {@link DivisionConfiguration} is not applicable for the number of teams specified
+     */
     public DivisionConfigurationKnockout(final int numTeams) throws InvalidNumberOfTeamsException {
         setTeams(numTeams);
     }

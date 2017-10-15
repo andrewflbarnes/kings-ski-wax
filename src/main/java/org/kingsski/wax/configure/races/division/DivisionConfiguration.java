@@ -22,8 +22,6 @@ import org.kingsski.wax.configure.races.group.RaceGroup;
  * This information is determined as necessary and used as required to determine the required set
  * of races.
  * </p>
- *
- * @author Barnesly
  */
 public interface DivisionConfiguration {
 
@@ -79,8 +77,6 @@ public interface DivisionConfiguration {
 
     /**
      * Thrown when attempting to configure for an invalid number of teams
-     *
-     * @author Barnesly
      */
     class InvalidNumberOfTeamsException extends Exception {
         private static final long serialVersionUID = 1L;
@@ -99,8 +95,6 @@ public interface DivisionConfiguration {
     /**
      * Thrown when configuration is successful but the configuration produced is invalid.
      * e.g. configuration is produced resulting in 6 groups but only 5 group names are set.
-     *
-     * @author Barnesly
      */
     class InvalidSetupException extends RuntimeException {
         private static final long serialVersionUID = 1L;

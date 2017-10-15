@@ -34,23 +34,18 @@ import java.util.Map;
 
 /**
  * <p>
- * Class for creating the initial configuration and races based on the settings
- * for each {@link Club} as set in the database. This is a somewhat intensive
- * task and as runs in its own thread.
+ * Class for creating the races for a set based on the results of races from the
+ * previous set for the same {@link RaceControl}.
  * </p>
- * <p>
  * <p>
  * Note that this class is package-private and should be utilised through the
  * {@link RaceConfigurer#generateRaces} method.
  * </p>
  * <p>
- * <p>
- * When executed this task retrieves all clubs under the current set league from
- * the database. For each division it then retrieves all competing teams
- * (creating those which don't already exist), ordering by highest seeded first
- * then alphabetically for unseeded.
+ * When executed this task retrieves all races from the previous set. The results
+ * for each mini league are analysed to determine which mini leagues each team
+ * belongs in for this "next" round
  * </p>
- * <p>
  * <p>
  * For each set of {@link Team}s a {@link DivisionConfigurationSetTwo} object is
  * used to create the corresponding {@link RaceGroup}s. The total overall
@@ -59,8 +54,6 @@ import java.util.Map;
  * out the corresponding races. Finally, this list of races is saved in order to
  * the database.
  * </p>
- *
- * @author Barnesly
  */
 class RaceConfigurerSetTwo {
     private static final Logger LOGGER = LoggerFactory.getLogger(RaceConfigurerSetTwo.class);
@@ -78,12 +71,13 @@ class RaceConfigurerSetTwo {
     private TeamDao teamDatasource;
 
     /**
-     * Parameterised constructor for instantiation.
-     * <p>
-     * the {@link RaceControl} to configure the races for
+     * Standard constructor
      *
+     * @param daoFactory  The {@link DaoFactory} which will provide DAOs to this instance
+     * @param writer      The {@link RaceListWriter} which will write these races out to file
+     * @param control     The {@link RaceControl} these races are being created for
      * @param raceSetNo   the number of the set to generate races for
-     * @param isKnockouts true if this round is the final knockout set for determining team position
+     * @param isKnockouts true if this round is a knockout round, false otherwise
      */
     public RaceConfigurerSetTwo(DaoFactory daoFactory, RaceListWriter writer, RaceControl control, int raceSetNo, boolean isKnockouts) {
         if (raceSetNo < MINIMUM_SET_NO) {
@@ -111,6 +105,12 @@ class RaceConfigurerSetTwo {
         return control;
     }
 
+    /**
+     * Creates the a set of races using the {@link RaceControl}, {@link RaceListWriter} and {@link DaoFactory}
+     * provided in the constructor
+     *
+     * @return true if the races were successfully created and written to file, false otherwise
+     */
     public Boolean execute() {
 
         // Create and open the DAOs for the generateRaceGroupMap method calls
@@ -447,8 +447,6 @@ class RaceConfigurerSetTwo {
 
     /**
      * Exception thrown when an error occurs trying to generate this set of races
-     *
-     * @author Barnesly
      */
     private class RaceGenerationFailException extends Exception {
         private static final long serialVersionUID = 1L;
@@ -465,8 +463,6 @@ class RaceConfigurerSetTwo {
 
     /**
      * Exception thrown when an attempt is made to instantiate the class with a set < 2
-     *
-     * @author Barnesly
      */
     private class SetNumberTooLowException extends RuntimeException {
         private static final long serialVersionUID = 1L;

@@ -9,8 +9,6 @@ import java.util.List;
 /**
  * DAO for dealing with interactions between {@link Club} objects and the
  * database. This is an extension of the {@link RaceOrganiserDao}.
- *
- * @author Barnesly
  */
 public interface ClubDao extends RaceOrganiserDao {
 

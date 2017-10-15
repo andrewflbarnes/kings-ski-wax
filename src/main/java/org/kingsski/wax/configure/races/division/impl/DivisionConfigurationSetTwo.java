@@ -27,8 +27,6 @@ import org.kingsski.wax.data.Team;
  * These race groups are analogous to the group tables which are created in the Kings Ski Club
  * Cheat Sheet as are the transformation mappings.
  * </p>
- *
- * @author Barnesly
  */
 public class DivisionConfigurationSetTwo implements DivisionConfiguration {
     private GroupConfiguration[] groupGrid;
@@ -42,7 +40,7 @@ public class DivisionConfigurationSetTwo implements DivisionConfiguration {
      * </p>
      *
      * @param numTeams the number of {@link Team}s competing
-     * @throws InvalidNumberOfTeamsException
+     * @throws InvalidNumberOfTeamsException If this {@link DivisionConfiguration} is not applicable for the number of teams specified
      */
     public DivisionConfigurationSetTwo(final int numTeams) throws InvalidNumberOfTeamsException {
         // Call the setTeams method as this does some configuration stuff

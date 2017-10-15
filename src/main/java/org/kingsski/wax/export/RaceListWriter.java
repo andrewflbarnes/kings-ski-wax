@@ -10,8 +10,6 @@ import java.util.List;
 
 /**
  * Well, let's hope this back of fuckery ends up working.
- *
- * @author Barnesly
  */
 public interface RaceListWriter {
     /**
