@@ -1,6 +1,5 @@
-/**
- * 
- */
+// Kings Ski Club 2017
+
 package org.kingsski.wax.configure.races.division.impl;
 
 import org.kingsski.wax.configure.races.division.DivisionConfiguration;
@@ -30,258 +29,255 @@ import org.slf4j.LoggerFactory;
  * run (only seeding), there is no transformation mapping provided by {@link
  * #getTransformationMapping()}, this simply returns null.
  * </p>
- * 
- * @author Barnesly
  */
 public class DivisionConfigurationSetOne implements DivisionConfiguration {
-	private static final Logger LOGGER = LoggerFactory.getLogger(DivisionConfigurationSetOne.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DivisionConfigurationSetOne.class);
 
-	private GroupConfiguration[] groupGrid;
-	private String[] groupNames;
+    private GroupConfiguration[] groupGrid;
+    private String[] groupNames;
 
-	/**
-	 * <p>
-	 * The constructor which sets the number and types of {@link RaceGroup}s as well as the
-	 * group names for the required number of teams. No transformation mapping is set as the
-	 * first set of races is not dependant on a previous set.
-	 * </p>
-	 * 
-	 * @param numTeams
-	 *            the number of {@link Team}s competing
-	 * @throws InvalidNumberOfTeamsException 
-	 */
-	public DivisionConfigurationSetOne(final int numTeams) throws InvalidNumberOfTeamsException {
-		// Call the setTeams method as this does some configuration stuff
-		setTeams(numTeams);
-	}
+    /**
+     * <p>
+     * The constructor which sets the number and types of {@link RaceGroup}s as well as the
+     * group names for the required number of teams. No transformation mapping is set as the
+     * first set of races is not dependant on a previous set.
+     * </p>
+     *
+     * @param numTeams the number of {@link Team}s competing
+     * @throws InvalidNumberOfTeamsException If this {@link DivisionConfiguration} is not applicable for the number of teams specified
+     */
+    public DivisionConfigurationSetOne(final int numTeams) throws InvalidNumberOfTeamsException {
+        // Call the setTeams method as this does some configuration stuff
+        setTeams(numTeams);
+    }
 
-	/* (non-Javadoc)
-	 * @see org.kingsski.wax.configure.races.division.DivisionConfiguration#setTeams(int)
-	 */
-	@Override
-	public void setTeams(final int numTeams) throws InvalidNumberOfTeamsException {
+    /* (non-Javadoc)
+     * @see org.kingsski.wax.configure.races.division.DivisionConfiguration#setTeams(int)
+     */
+    @Override
+    public void setTeams(final int numTeams) throws InvalidNumberOfTeamsException {
 
-		LOGGER.debug("configuring for {} teams", numTeams);
-		
-		switch (numTeams) {
-		case 4:
-			this.groupGrid = new GroupConfiguration[] { GroupConfiguration.FOUR_SPECIAL };
-			break;
-		case 5:
-			this.groupGrid = new GroupConfiguration[] { GroupConfiguration.FIVE_SPECIAL };
-			break;
-		case 6:
-			this.groupGrid = new GroupConfiguration[] { GroupConfiguration.SIX_SPECIAL };
-			break;
-		case 7:
-			this.groupGrid = new GroupConfiguration[] {
-					GroupConfiguration.FOUR, GroupConfiguration.THREE };
-			break;
-		case 8:
-			this.groupGrid = new GroupConfiguration[] {
-					GroupConfiguration.FOUR, GroupConfiguration.FOUR };
-			break;
-		case 9:
-			this.groupGrid = new GroupConfiguration[] {
-					GroupConfiguration.THREE, GroupConfiguration.THREE,
-					GroupConfiguration.THREE };
-			break;
-		case 10:
-			this.groupGrid = new GroupConfiguration[] {
-					GroupConfiguration.FOUR, GroupConfiguration.THREE,
-					GroupConfiguration.THREE };
-			break;
-		case 11:
-			this.groupGrid = new GroupConfiguration[] {
-					GroupConfiguration.FOUR, GroupConfiguration.FOUR,
-					GroupConfiguration.THREE };
-			break;
-		case 12:
-			this.groupGrid = new GroupConfiguration[] {
-					GroupConfiguration.THREE, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.THREE };
-			break;
-		case 13:
-			this.groupGrid = new GroupConfiguration[] {
-					GroupConfiguration.FOUR, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.THREE };
-			break;
-		case 14:
-			this.groupGrid = new GroupConfiguration[] {
-					GroupConfiguration.FOUR, GroupConfiguration.FOUR,
-					GroupConfiguration.THREE, GroupConfiguration.THREE };
-			break;
-		case 15:
-			this.groupGrid = new GroupConfiguration[] {
-					GroupConfiguration.FOUR, GroupConfiguration.FOUR,
-					GroupConfiguration.FOUR, GroupConfiguration.THREE };
-			break;
-		case 16:
-			this.groupGrid = new GroupConfiguration[] {
-					GroupConfiguration.FOUR, GroupConfiguration.FOUR,
-					GroupConfiguration.FOUR, GroupConfiguration.FOUR };
-			break;
-		case 17:
-			this.groupGrid = new GroupConfiguration[] {
-					GroupConfiguration.THREE, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.TWO };
-			break;
-		case 18:
-			this.groupGrid = new GroupConfiguration[] {
-					GroupConfiguration.THREE, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.THREE };
-			break;
-		case 19:
-			this.groupGrid = new GroupConfiguration[] {
-					GroupConfiguration.FOUR, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.THREE };
-			break;
-		case 20:
-			this.groupGrid = new GroupConfiguration[] {
-					GroupConfiguration.FOUR, GroupConfiguration.FOUR,
-					GroupConfiguration.THREE, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.THREE };
-			break;
-		case 21:
-			this.groupGrid = new GroupConfiguration[] {
-					GroupConfiguration.THREE, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.TWO,
-					GroupConfiguration.TWO, GroupConfiguration.TWO };
-			break;
-		case 22:
-			this.groupGrid = new GroupConfiguration[] {
-					GroupConfiguration.THREE, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.THREE,
-					GroupConfiguration.TWO, GroupConfiguration.TWO };
-			break;
-		case 23:
-			this.groupGrid = new GroupConfiguration[] {
-					GroupConfiguration.THREE, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.TWO };
-			break;
-		case 24:
-			this.groupGrid = new GroupConfiguration[] {
-					GroupConfiguration.THREE, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.THREE };
-			break;
-		case 25:
-			this.groupGrid = new GroupConfiguration[] {
-					GroupConfiguration.FOUR, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.THREE };
-			break;
-		case 26:
-			this.groupGrid = new GroupConfiguration[] {
-					GroupConfiguration.FOUR, GroupConfiguration.FOUR,
-					GroupConfiguration.THREE, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.THREE };
-			break;
-		case 27:
-			this.groupGrid = new GroupConfiguration[] {
-					GroupConfiguration.FOUR, GroupConfiguration.FOUR,
-					GroupConfiguration.FOUR, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.THREE };
-			break;
-		case 28:
-			this.groupGrid = new GroupConfiguration[] {
-					GroupConfiguration.FOUR, GroupConfiguration.FOUR,
-					GroupConfiguration.FOUR, GroupConfiguration.FOUR,
-					GroupConfiguration.THREE, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.THREE };
-			break;
-		case 29:
-			this.groupGrid = new GroupConfiguration[] {
-					GroupConfiguration.FOUR, GroupConfiguration.FOUR,
-					GroupConfiguration.FOUR, GroupConfiguration.FOUR,
-					GroupConfiguration.FOUR, GroupConfiguration.THREE,
-					GroupConfiguration.THREE, GroupConfiguration.THREE };
-			break;
-		case 30:
-			this.groupGrid = new GroupConfiguration[] {
-					GroupConfiguration.FOUR, GroupConfiguration.FOUR,
-					GroupConfiguration.FOUR, GroupConfiguration.FOUR,
-					GroupConfiguration.FOUR, GroupConfiguration.FOUR,
-					GroupConfiguration.THREE, GroupConfiguration.THREE };
-			break;
-		case 31:
-			this.groupGrid = new GroupConfiguration[] {
-					GroupConfiguration.FOUR, GroupConfiguration.FOUR,
-					GroupConfiguration.FOUR, GroupConfiguration.FOUR,
-					GroupConfiguration.FOUR, GroupConfiguration.FOUR,
-					GroupConfiguration.FOUR, GroupConfiguration.THREE };
-			break;
-		case 32:
-			this.groupGrid = new GroupConfiguration[] {
-					GroupConfiguration.FOUR, GroupConfiguration.FOUR,
-					GroupConfiguration.FOUR, GroupConfiguration.FOUR,
-					GroupConfiguration.FOUR, GroupConfiguration.FOUR,
-					GroupConfiguration.FOUR, GroupConfiguration.FOUR };
-			break;
-		default:
-			throw new InvalidNumberOfTeamsException("Too many/few teams (" + String.valueOf(numTeams) + ")");
-		}
+        LOGGER.debug("configuring for {} teams", numTeams);
 
-		switch (this.groupGrid.length) {
-		case 1:
-			this.groupNames = new String[] { "A" };
-			break;
-		case 2:
-			this.groupNames = new String[] { "A", "B" };
-			break;
-		case 3:
-			this.groupNames = new String[] { "A", "B", "C" };
-			break;
-		case 4:
-			this.groupNames = new String[] { "A", "B", "C", "D" };
-			break;
-		case 6:
-			this.groupNames = new String[] { "A", "D", "B", "E", "C", "F" };
-			break;
-		case 8:
-			this.groupNames = new String[] { "A", "E", "B", "F", "C", "G", "D",
-					"H" };
-			break;
-		}
+        switch (numTeams) {
+            case 4:
+                this.groupGrid = new GroupConfiguration[]{GroupConfiguration.FOUR_SPECIAL};
+                break;
+            case 5:
+                this.groupGrid = new GroupConfiguration[]{GroupConfiguration.FIVE_SPECIAL};
+                break;
+            case 6:
+                this.groupGrid = new GroupConfiguration[]{GroupConfiguration.SIX_SPECIAL};
+                break;
+            case 7:
+                this.groupGrid = new GroupConfiguration[]{
+                        GroupConfiguration.FOUR, GroupConfiguration.THREE};
+                break;
+            case 8:
+                this.groupGrid = new GroupConfiguration[]{
+                        GroupConfiguration.FOUR, GroupConfiguration.FOUR};
+                break;
+            case 9:
+                this.groupGrid = new GroupConfiguration[]{
+                        GroupConfiguration.THREE, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE};
+                break;
+            case 10:
+                this.groupGrid = new GroupConfiguration[]{
+                        GroupConfiguration.FOUR, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE};
+                break;
+            case 11:
+                this.groupGrid = new GroupConfiguration[]{
+                        GroupConfiguration.FOUR, GroupConfiguration.FOUR,
+                        GroupConfiguration.THREE};
+                break;
+            case 12:
+                this.groupGrid = new GroupConfiguration[]{
+                        GroupConfiguration.THREE, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE};
+                break;
+            case 13:
+                this.groupGrid = new GroupConfiguration[]{
+                        GroupConfiguration.FOUR, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE};
+                break;
+            case 14:
+                this.groupGrid = new GroupConfiguration[]{
+                        GroupConfiguration.FOUR, GroupConfiguration.FOUR,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE};
+                break;
+            case 15:
+                this.groupGrid = new GroupConfiguration[]{
+                        GroupConfiguration.FOUR, GroupConfiguration.FOUR,
+                        GroupConfiguration.FOUR, GroupConfiguration.THREE};
+                break;
+            case 16:
+                this.groupGrid = new GroupConfiguration[]{
+                        GroupConfiguration.FOUR, GroupConfiguration.FOUR,
+                        GroupConfiguration.FOUR, GroupConfiguration.FOUR};
+                break;
+            case 17:
+                this.groupGrid = new GroupConfiguration[]{
+                        GroupConfiguration.THREE, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.TWO};
+                break;
+            case 18:
+                this.groupGrid = new GroupConfiguration[]{
+                        GroupConfiguration.THREE, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE};
+                break;
+            case 19:
+                this.groupGrid = new GroupConfiguration[]{
+                        GroupConfiguration.FOUR, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE};
+                break;
+            case 20:
+                this.groupGrid = new GroupConfiguration[]{
+                        GroupConfiguration.FOUR, GroupConfiguration.FOUR,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE};
+                break;
+            case 21:
+                this.groupGrid = new GroupConfiguration[]{
+                        GroupConfiguration.THREE, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.TWO,
+                        GroupConfiguration.TWO, GroupConfiguration.TWO};
+                break;
+            case 22:
+                this.groupGrid = new GroupConfiguration[]{
+                        GroupConfiguration.THREE, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE,
+                        GroupConfiguration.TWO, GroupConfiguration.TWO};
+                break;
+            case 23:
+                this.groupGrid = new GroupConfiguration[]{
+                        GroupConfiguration.THREE, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.TWO};
+                break;
+            case 24:
+                this.groupGrid = new GroupConfiguration[]{
+                        GroupConfiguration.THREE, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE};
+                break;
+            case 25:
+                this.groupGrid = new GroupConfiguration[]{
+                        GroupConfiguration.FOUR, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE};
+                break;
+            case 26:
+                this.groupGrid = new GroupConfiguration[]{
+                        GroupConfiguration.FOUR, GroupConfiguration.FOUR,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE};
+                break;
+            case 27:
+                this.groupGrid = new GroupConfiguration[]{
+                        GroupConfiguration.FOUR, GroupConfiguration.FOUR,
+                        GroupConfiguration.FOUR, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE};
+                break;
+            case 28:
+                this.groupGrid = new GroupConfiguration[]{
+                        GroupConfiguration.FOUR, GroupConfiguration.FOUR,
+                        GroupConfiguration.FOUR, GroupConfiguration.FOUR,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE};
+                break;
+            case 29:
+                this.groupGrid = new GroupConfiguration[]{
+                        GroupConfiguration.FOUR, GroupConfiguration.FOUR,
+                        GroupConfiguration.FOUR, GroupConfiguration.FOUR,
+                        GroupConfiguration.FOUR, GroupConfiguration.THREE,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE};
+                break;
+            case 30:
+                this.groupGrid = new GroupConfiguration[]{
+                        GroupConfiguration.FOUR, GroupConfiguration.FOUR,
+                        GroupConfiguration.FOUR, GroupConfiguration.FOUR,
+                        GroupConfiguration.FOUR, GroupConfiguration.FOUR,
+                        GroupConfiguration.THREE, GroupConfiguration.THREE};
+                break;
+            case 31:
+                this.groupGrid = new GroupConfiguration[]{
+                        GroupConfiguration.FOUR, GroupConfiguration.FOUR,
+                        GroupConfiguration.FOUR, GroupConfiguration.FOUR,
+                        GroupConfiguration.FOUR, GroupConfiguration.FOUR,
+                        GroupConfiguration.FOUR, GroupConfiguration.THREE};
+                break;
+            case 32:
+                this.groupGrid = new GroupConfiguration[]{
+                        GroupConfiguration.FOUR, GroupConfiguration.FOUR,
+                        GroupConfiguration.FOUR, GroupConfiguration.FOUR,
+                        GroupConfiguration.FOUR, GroupConfiguration.FOUR,
+                        GroupConfiguration.FOUR, GroupConfiguration.FOUR};
+                break;
+            default:
+                throw new InvalidNumberOfTeamsException("Too many/few teams (" + String.valueOf(numTeams) + ")");
+        }
 
-		if (this.groupGrid.length != this.groupNames.length) {
-			throw new InvalidSetupException("Number of groups (" + this.groupGrid.length + ") and" +
-					" number of group names (" + this.groupNames.length + ") do not match");
-		}
-	}
+        switch (this.groupGrid.length) {
+            case 1:
+                this.groupNames = new String[]{"A"};
+                break;
+            case 2:
+                this.groupNames = new String[]{"A", "B"};
+                break;
+            case 3:
+                this.groupNames = new String[]{"A", "B", "C"};
+                break;
+            case 4:
+                this.groupNames = new String[]{"A", "B", "C", "D"};
+                break;
+            case 6:
+                this.groupNames = new String[]{"A", "D", "B", "E", "C", "F"};
+                break;
+            case 8:
+                this.groupNames = new String[]{"A", "E", "B", "F", "C", "G", "D",
+                        "H"};
+                break;
+        }
 
-	/* (non-Javadoc)
-	 * @see org.kingsski.wax.configure.races.division.DivisionConfiguration#getTransformationMapping()
-	 */
-	@Override
-	public String[][] getTransformationMapping() {
-		return null;
-	}
+        if (this.groupGrid.length != this.groupNames.length) {
+            throw new InvalidSetupException("Number of groups (" + this.groupGrid.length + ") and" +
+                    " number of group names (" + this.groupNames.length + ") do not match");
+        }
+    }
 
-	/* (non-Javadoc)
-	 * @see org.kingsski.wax.configure.races.division.DivisionConfiguration#getGroupNames()
-	 */
-	@Override
-	public String[] getGroupNames() {
-		return this.groupNames;
-	}
+    /* (non-Javadoc)
+     * @see org.kingsski.wax.configure.races.division.DivisionConfiguration#getTransformationMapping()
+     */
+    @Override
+    public String[][] getTransformationMapping() {
+        return null;
+    }
 
-	/* (non-Javadoc)
-	 * @see org.kingsski.wax.configure.races.division.DivisionConfiguration#getGroupGrid()
-	 */
-	@Override
-	public GroupConfiguration[] getGroupGrid() {
-		return this.groupGrid;
-	}
+    /* (non-Javadoc)
+     * @see org.kingsski.wax.configure.races.division.DivisionConfiguration#getGroupNames()
+     */
+    @Override
+    public String[] getGroupNames() {
+        return this.groupNames;
+    }
+
+    /* (non-Javadoc)
+     * @see org.kingsski.wax.configure.races.division.DivisionConfiguration#getGroupGrid()
+     */
+    @Override
+    public GroupConfiguration[] getGroupGrid() {
+        return this.groupGrid;
+    }
 }

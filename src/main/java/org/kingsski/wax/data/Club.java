@@ -1,5 +1,6 @@
-package org.kingsski.wax.data;
+// Kings Ski Club 2017
 
+package org.kingsski.wax.data;
 
 import org.kingsski.wax.data.dao.ClubDao;
 
@@ -7,13 +8,10 @@ import org.kingsski.wax.data.dao.ClubDao;
  * <p>
  * Object containing details of Clubs. Fields are analogous with the database.
  * </p>
- * 
  * <p>
  * The {@link ClubDao} performs
  * retrievals into, adds from and updates from this object type.
  * </p>
- * 
- * @author Barnesly
  */
 public class Club {
     private String clubName;
@@ -31,8 +29,7 @@ public class Club {
     }
 
     /**
-     * @param clubName
-     *            the clubName to set
+     * @param clubName the clubName to set
      */
     public void setClubName(String clubName) {
         this.clubName = clubName;
@@ -102,8 +99,7 @@ public class Club {
     }
 
     /**
-     * @param clubShortName
-     *            the clubShortName to set
+     * @param clubShortName the clubShortName to set
      */
     public void setClubShortName(String clubShortName) {
         this.clubShortName = clubShortName;

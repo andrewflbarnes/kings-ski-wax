@@ -1,3 +1,5 @@
+// Kings Ski Club 2017
+
 package org.kingsski.wax.seeding;
 
 import org.kingsski.wax.data.Club;
@@ -9,11 +11,10 @@ import java.util.List;
  * around a club and team DAO - we should probably just push these into the
  * SeedRetrieverPersisterManager
  */
+
 /**
- * Defines an interface for the persistence of (@link Team}s and their seeding information utilised
+ * Defines an interface for the persistence of {@link Team}s and their seeding information utilised
  * by the {@link SeedRetrieverPersisterManager}.
- *
- * Created by Barnesly on 09/05/2017.
  */
 public interface SeedPersister {
 
@@ -32,7 +33,7 @@ public interface SeedPersister {
     /**
      * Resets the seeding/points associated with all teams in a given league and division.
      *
-     * @param league The league which teams should be reset for
+     * @param league   The league which teams should be reset for
      * @param division The division which teams should be reset for
      */
     void resetTeams(String league, String division);
