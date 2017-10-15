@@ -5,13 +5,14 @@ package org.kingsski.wax.configure.races.division.impl;
 
 import org.kingsski.wax.configure.races.division.DivisionConfiguration;
 import org.kingsski.wax.configure.races.group.GroupConfiguration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Barnesly.
  */
 public class DivisionConfigurationKnockout implements DivisionConfiguration {
-
-    private static final String LOG_TAG = DivisionConfigurationKnockout.class.toString();
+    private static final Logger LOGGER = LoggerFactory.getLogger(DivisionConfigurationKnockout.class);
 
     private GroupConfiguration[] groupGrid;
     private String[] groupNames;
@@ -39,7 +40,7 @@ public class DivisionConfigurationKnockout implements DivisionConfiguration {
     @Override
     public void setTeams(int numTeams) throws InvalidNumberOfTeamsException {
 
-//        Log.d(LOG_TAG, "configuring for " + numTeams + " teams");
+        LOGGER.debug("configuring for {} teams", numTeams);
 
         if (numTeams < 4 || numTeams > 32) {
             throw new InvalidNumberOfTeamsException("Too many/few teams (" + String.valueOf(numTeams) + ")");

@@ -7,6 +7,8 @@ import org.kingsski.wax.configure.races.division.DivisionConfiguration;
 import org.kingsski.wax.configure.races.group.GroupConfiguration;
 import org.kingsski.wax.configure.races.group.RaceGroup;
 import org.kingsski.wax.data.Team;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <p>
@@ -32,7 +34,7 @@ import org.kingsski.wax.data.Team;
  * @author Barnesly
  */
 public class DivisionConfigurationSetOne implements DivisionConfiguration {
-	private static final String LOG_TAG = DivisionConfigurationSetOne.class.toString();
+	private static final Logger LOGGER = LoggerFactory.getLogger(DivisionConfigurationSetOne.class);
 
 	private GroupConfiguration[] groupGrid;
 	private String[] groupNames;
@@ -59,7 +61,7 @@ public class DivisionConfigurationSetOne implements DivisionConfiguration {
 	@Override
 	public void setTeams(final int numTeams) throws InvalidNumberOfTeamsException {
 
-//		Log.d(LOG_TAG, "configuring for " + numTeams + " teams");
+		LOGGER.debug("configuring for {} teams", numTeams);
 		
 		switch (numTeams) {
 		case 4:

@@ -2,6 +2,8 @@ package org.kingsski.wax.configure.races.group;
 
 import org.kingsski.wax.data.Race;
 import org.kingsski.wax.data.Team;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,6 +18,7 @@ import java.util.Map;
  *
  */
 public class RaceGroup {
+    private  static final Logger LOGGER = LoggerFactory.getLogger(RaceGroup.class);
 	private static final int TEAM_NOT_FOUND = -1;
 	
 	private List<Team> teams;
@@ -161,24 +164,25 @@ public class RaceGroup {
 	 * @return true if the race list was generated, false otherwise.
 	 */
 	public boolean initRaces() {
+	    // TODO Unchecked exception throws?
 		if (this.configuration == null) {
-//			Log.w(RaceGroup.class.toString(), "group configuration not set");
+			LOGGER.warn("group configuration not set");
 			return false;
 		}
 		if (this.teams == null || !hasFullTeamList()) {
-//			Log.w(RaceGroup.class.toString(), "teams not set");
+			LOGGER.warn("teams not set");
 			return false;
 		}
 		if (this.controlId < 1) {
-//			Log.w(RaceGroup.class.toString(), "control ID not set");
+			LOGGER.warn("control ID not set");
 			return false;
 		}
 		if (this.roundNo < 1) {
-//			Log.w(RaceGroup.class.toString(), "round number not set");
+			LOGGER.warn("round number not set");
 			return false;
 		}
 		if (this.groupName == null || this.groupName.isEmpty()) {
-//			Log.w(RaceGroup.class.toString(), "group name not set");
+			LOGGER.warn("group name not set");
 			return false;
 		}
 
