@@ -2,7 +2,6 @@ package org.kingsski.wax.data;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.kingsski.wax.data.Team;
 
 import java.util.ArrayList;
 import java.util.Collections;
