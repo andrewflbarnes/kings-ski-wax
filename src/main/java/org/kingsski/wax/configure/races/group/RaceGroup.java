@@ -264,11 +264,11 @@ public class RaceGroup {
             }
 
             // Update the DSQs if appropriate
-            if (race.getTeamOneDSQ() != null && !race.getTeamOneDSQ().isEmpty()) {
+            if (race.getTeamOneDsq() != null && !race.getTeamOneDsq().isEmpty()) {
                 oldScore = teamDsqs.get(team);
                 teamDsqs.put(team, oldScore + 1);
             }
-            if (race.getTeamTwoDSQ() != null && !race.getTeamTwoDSQ().isEmpty()) {
+            if (race.getTeamTwoDsq() != null && !race.getTeamTwoDsq().isEmpty()) {
                 oldScore = teamDsqs.get(team);
                 teamDsqs.put(team, oldScore + 1);
             }

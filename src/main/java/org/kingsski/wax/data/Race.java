@@ -15,24 +15,84 @@ import org.kingsski.wax.data.dao.RaceDao;
  * </p>
  */
 public class Race implements Comparable<Race> {
-    private static final String[] groups = { "A", "E", "B", "F", "C", "G", "D",
-            "H", "I", "II", "III", "IV", "V", "VI", "VII", "VIII" };
+    private static final String[] groups = {
+            "A", "E", "B", "F", "C", "G", "D", "H",
+            "I", "II", "III", "IV", "V", "VI", "VII", "VIII" };
+
     private int controlId;
-    private String division;
+    private String league;
     private int roundNo;
-    private int raceNo;
+    private String set;
+    private String division;
     private String group;
+    private int raceNo;
     private int teamOne;
     private int teamTwo;
     private int teamWin;
-    private String teamOneDSQ;
-    private String teamTwoDSQ;
+    private String teamOneDsq;
+    private String teamTwoDsq;
+    private boolean next;
 
     /**
      * Standard constructor
      */
     public Race() {
         // Empty default constructor
+    }
+
+    /**
+     * Standard constructor for a new {@link Race}
+     *
+     * @param controlId The controlId associated with this race
+     * @param league The league associated with this race
+     * @param roundNo The roundNo associated with this race
+     * @param set The set associated with this race
+     * @param division The division this race belongs to
+     * @param raceNo The number of this race in the current round
+     * @param teamOne The first team competing
+     * @param teamTwo The second team competing
+     * @param teamWin The winner of the race
+     * @param teamOneDsq The reason the first team was disqualified
+     * @param teamTwoDsq The reason the second team was disqualified
+     * @param next true if this is the next race being run, false otherwise
+     */
+    public Race(int controlId, String league, int roundNo, String set,
+                String division, String group, int raceNo, int teamOne,
+                int teamTwo, int teamWin, String teamOneDsq, String teamTwoDsq, boolean next) {
+        this.controlId = controlId;
+        this.league = league;
+        this.roundNo = roundNo;
+        this.set = set;
+        this.division = division;
+        this.group = group;
+        this.raceNo = raceNo;
+        this.teamOne = teamOne;
+        this.teamTwo = teamTwo;
+        this.teamWin = teamWin;
+        this.teamOneDsq = teamOneDsq;
+        this.teamTwoDsq = teamTwoDsq;
+        this.next = next;
+    }
+
+    /**
+     * Convenience constructor which clones another instance
+     *
+     * @param raceToCopy The {@link Race} to be cloned.
+     */
+    public Race(Race raceToCopy) {
+        this.controlId = raceToCopy.getControlId();
+        this.league = raceToCopy.getLeague();
+        this.roundNo = raceToCopy.getRoundNo();
+        this.set = raceToCopy.getSet();
+        this.division = raceToCopy.getDivision();
+        this.group = raceToCopy.getGroup();
+        this.raceNo = raceToCopy.getRaceNo();
+        this.teamOne = raceToCopy.getTeamOne();
+        this.teamTwo = raceToCopy.getTeamTwo();
+        this.teamWin = raceToCopy.getTeamWin();
+        this.teamOneDsq = raceToCopy.getTeamOneDsq();
+        this.teamTwoDsq = raceToCopy.getTeamTwoDsq();
+        this.next = raceToCopy.isNext();
     }
 
     /**
@@ -51,18 +111,18 @@ public class Race implements Comparable<Race> {
     }
 
     /**
-     * @return the division this race is being run under
+     * @return the league this race is being run under
      */
-    public String getDivision() {
-        return division;
+    public String getLeague() {
+        return league;
     }
 
     /**
-     * @param division
-     *            the division this race is being run under
+     * @param league
+     *            the league this race is being run under
      */
-    public void setDivision(String division) {
-        this.division = division;
+    public void setLeague(String league) {
+        this.league = league;
     }
 
     /**
@@ -81,18 +141,32 @@ public class Race implements Comparable<Race> {
     }
 
     /**
-     * @return the race number of this race
+     * @return the set this race is being run under
      */
-    public int getRaceNo() {
-        return raceNo;
+    public String getSet() {
+        return set;
     }
 
     /**
-     * @param raceNo
-     *            the race number of this race
+     * @param set the set this race is being run under
      */
-    public void setRaceNo(int raceNo) {
-        this.raceNo = raceNo;
+    public void setSet(String set) {
+        this.set = set;
+    }
+
+    /**
+     * @return the division this race is being run under
+     */
+    public String getDivision() {
+        return division;
+    }
+
+    /**
+     * @param division
+     *            the division this race is being run under
+     */
+    public void setDivision(String division) {
+        this.division = division;
     }
 
     /**
@@ -107,6 +181,21 @@ public class Race implements Comparable<Race> {
      */
     public void setGroup(String group) {
         this.group = group;
+    }
+
+    /**
+     * @return the race number of this race
+     */
+    public int getRaceNo() {
+        return raceNo;
+    }
+
+    /**
+     * @param raceNo
+     *            the race number of this race
+     */
+    public void setRaceNo(int raceNo) {
+        this.raceNo = raceNo;
     }
 
     /**
@@ -158,34 +247,48 @@ public class Race implements Comparable<Race> {
      * @return empty or null if team one has not been disqualified, otherwise
      *         the text associated with the disqualification
      */
-    public String getTeamOneDSQ() {
-        return teamOneDSQ;
+    public String getTeamOneDsq() {
+        return teamOneDsq;
     }
 
     /**
-     * @param teamOneDSQ
+     * @param teamOneDsq
      *            empty or null if team one has not been disqualified, otherwise
      *            the text associated with the disqualification
      */
-    public void setTeamOneDSQ(String teamOneDSQ) {
-        this.teamOneDSQ = teamOneDSQ;
+    public void setTeamOneDsq(String teamOneDsq) {
+        this.teamOneDsq = teamOneDsq;
     }
 
     /**
      * @return the empty or null if team two has not been disqualified, otherwise
      *         the text associated with the disqualification
      */
-    public String getTeamTwoDSQ() {
-        return teamTwoDSQ;
+    public String getTeamTwoDsq() {
+        return teamTwoDsq;
     }
 
     /**
-     * @param teamTwoDSQ
+     * @return true if this is the next race we are running, false otherwise
+     */
+    public boolean isNext() {
+        return next;
+    }
+
+    /**
+     * @param next true if this is the next race we are running, false otherwise
+     */
+    public void setNext(boolean next) {
+        this.next = next;
+    }
+
+    /**
+     * @param teamTwoDsq
      *            the empty or null if team two has not been disqualified,
      *            otherwise the text associated with the disqualification
      */
-    public void setTeamTwoDSQ(String teamTwoDSQ) {
-        this.teamTwoDSQ = teamTwoDSQ;
+    public void setTeamTwoDsq(String teamTwoDsq) {
+        this.teamTwoDsq = teamTwoDsq;
     }
 
     /* (non-Javadoc)
@@ -225,5 +328,137 @@ public class Race implements Comparable<Race> {
     public String toString() {
         return "id " + this.controlId + ", division " + this.division + ", set "
                 + this.roundNo + ", race " + this.raceNo + ", team " + this.teamOne + " vs team " + this.teamTwo;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null) {
+            return false;
+        }
+
+        if (Race.class.equals(obj.getClass())) {
+            Race other = (Race)obj;
+
+            if (this.league == null
+                    || this.set == null
+                    || this.division == null
+                    || this.group == null) {
+                return false;
+            }
+
+            return this.controlId == other.controlId &&
+                    this.league.equals(other.getLeague()) &&
+                    this.roundNo == other.roundNo &&
+                    this.set.equals(other.getSet()) &&
+                    this.division.equals(other.getDivision()) &&
+                    this.group.equals(other.getGroup()) &&
+                    this.raceNo == other.raceNo &&
+                    this.teamOne == other.teamOne &&
+                    this.teamTwo == other.teamTwo;
+        }
+
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int prime = 31;
+        int result = 1;
+
+        result = prime * result + controlId;
+        result = prime * result + (league == null ? 0 : league.hashCode());
+        result = prime * result + roundNo;
+        result = prime * result + (set == null ? 0 : set.hashCode());
+        result = prime * result + (division == null ? 0 : division.hashCode());
+        result = prime * result + (group == null ? 0 : group.hashCode());
+        result = prime * result + raceNo;
+        result = prime * result + teamOne;
+        result = prime * result + teamTwo;
+
+        return result;
+    }
+
+    public static class RaceBuilder {
+        private Race race = new Race();
+
+        public RaceBuilder() {}
+
+        public Race build() {
+            return new Race(race);
+        }
+
+        public RaceBuilder reset() {
+            race = new Race();
+            return this;
+        }
+
+        public RaceBuilder setControlId(int controlId) {
+            race.setControlId(controlId);
+            return this;
+        }
+
+        public RaceBuilder setLeague(String league) {
+            race.setLeague(league);
+            return this;
+        }
+
+        public RaceBuilder setRoundNo(int roundNo) {
+            race.setRoundNo(roundNo);
+            return this;
+        }
+
+        public RaceBuilder setSet(String set) {
+            race.setSet(set);
+            return this;
+        }
+
+        public RaceBuilder setDivision(String division) {
+            race.setDivision(division);
+            return this;
+        }
+
+        public RaceBuilder setGroup(String group) {
+            race.setGroup(group);
+            return this;
+        }
+
+        public RaceBuilder setRaceNo(int raceNo) {
+            race.setRaceNo(raceNo);
+            return this;
+        }
+
+        public RaceBuilder setTeamOne(int teamOne) {
+            race.setTeamOne(teamOne);
+            return this;
+        }
+
+        public RaceBuilder setTeamTwo(int teamTwo) {
+            race.setTeamTwo(teamTwo);
+            return this;
+        }
+
+        public RaceBuilder setTeamWin(int teamWin) {
+            race.setTeamWin(teamWin);
+            return this;
+        }
+
+        public RaceBuilder setTeamOneDsq(String teamOneDsq) {
+            race.setTeamOneDsq(teamOneDsq);
+            return this;
+        }
+
+        public RaceBuilder setTeamTwoDsq(String teamTwoDsq) {
+            race.setTeamTwoDsq(teamTwoDsq);
+            return this;
+        }
+
+        public RaceBuilder setNext(boolean next) {
+            race.setNext(next);
+            return this;
+        }
     }
 }
