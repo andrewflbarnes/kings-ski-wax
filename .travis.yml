@@ -1,3 +1,10 @@
 language: java
 jdk:
   - oraclejdk8
+notifications:
+  slack:
+    rooms:
+      - kingsskiclub:BBL9dzzOo8JFgSqRupOaxr4p#software-integrations
+    template:
+      - "%{repository_slug} (%{commit}) to %{branch} by %{author} : %{result}"
+      - "Build details: %{build_url}"
