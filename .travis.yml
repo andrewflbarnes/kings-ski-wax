@@ -1,12 +1,28 @@
 language: java
 jdk:
-  - oraclejdk8
+- oraclejdk8
+sudo: false
+install: true
+addons:
+  sonarcloud:
+    organization: "andrewflbarnes-github"
+    token:
+      secure: AJstwHwnmyOFA7P1briETTL0mKBuZJNqmw9XlM8x7/U3CGCgnqKfRywvkoo5dGWxjdyaRaLmqRXfog6BtIq25c5WAmCGfOYTFsVnbLAwu3A5SmmxueJobyBuvS77Wq3++jFjpiGNYXCkCHChk3AzcI7nI7IXEhq4fyG6DnGz64DM5+V2rDI6V7FPTzyB5jllCMwr4USl+mYxHQW6lzfKe8pxIh/0YvGqZqiiHvKugQJ7eRWcgfktsa/9NKss2R0FiAh5aTaNZcBanlyNzuZLXq33txiEdhznifjLGNXTCSz1MciwklEu/2Dh24N15UMSxUpBsv0bRaS+kx7JIsQveoGVtx1MPTd4VqpKmqbG65jjxR43ekhDo+uNfXeJKW5fbprNmTb3fqgt91GSR64gML7iedYqYgOue1KiDWqC93XhnCM9rFEt9MVFHVO65kCF6MZ0WbO/EYrfkKzrSws6oHjK8z5vpXNYKRDXYO4YbyKcf53Q2zeHAvc04kOUgew10PxJ9we3xVawRF8TSRBkpfEg86JSn0tmJDO9vvJizNbKTna9nJmaxmoVedeI1oBeM5+oUGJEVcjchvSd6fDiu5QdC2+8pU8cBLqMtU0ALFwvXh6/fzr06KAhAiTkjuE3cqxDjevGfb0fPebmwzMl4NxxQDBZINmry5O5JAjnkZQ=
+script:
+- ./gradlew sonarqube
 after_success:
-  - ./gradlew cobertura coveralls
+- ./gradlew cobertura coveralls
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
+    - '$HOME/.gradle'
+    - '.gradle'
 notifications:
   slack:
     rooms:
-      - kingsskiclub:BBL9dzzOo8JFgSqRupOaxr4p#software-integrations
+    - kingsskiclub:BBL9dzzOo8JFgSqRupOaxr4p#software-integrations
     template:
-      - "%{repository_slug} (%{commit}) to %{branch} by %{author} : %{result}"
-      - "Build details: %{build_url}"
+    - '%{repository_slug} (%{commit}) to %{branch} by %{author} : %{result}'
+    - 'Build details: %{build_url}'
+
